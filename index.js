@@ -3,33 +3,39 @@ class productManager {
     this.products;
     this.autoId = 0;
   }
-}
 
-addProducts(title, description, price, thumbnail, code, stock);
-{
-  const newProduct = {
-    title,
-    description,
-    price,
-    thumbnail,
-    code,
-    stock,
-    id: this.autoId + 1,
-  };
+  addProducts(title, description, price, thumbnail, code, stock) {
+    const newProduct = {
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
+      id: this.autoId + 1,
+    };
 
-  const validateCode = this.products.find(
-    (product) => product.code === newProduct.code
-  );
-  if (validateCode) {
-    console.log("Error, el codigo ingresado ya esta en uso");
-  } else {
-    this.products.push(newProduct);
-    this.lastId++;
+    const validateCode = this.products.find(
+      (product) => product.code === newProduct.code
+    );
+    if (validateCode) {
+      console.log("Error, el codigo ingresado ya esta en uso");
+    } else {
+      this.products.push(newProduct);
+      this.lastId++;
+    }
+  }
+
+  getProducts() {
+    console.log(this.products);
+  }
+
+  getProductsById(id) {
+    let searchId = this.product.find((i) => i.id == id);
+    if (searchId === undefined) {
+      console.log("Not Found");
+    } else {
+      return searchId;
+    }
   }
 }
-
-getProducts();
-{
-  console.log(this.products);
-}
-
