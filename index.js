@@ -48,4 +48,3 @@ productManager.addProducts("productazo", "es un comestible", 200, "img not found
 productManager.getProducts();
 productManager.getProductsById(2)
 
-console.log(ProductManager)
