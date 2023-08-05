@@ -1,4 +1,4 @@
-class productManager {
+class ProductManager {
   constructor() {
     this.products;
     this.autoId = 0;
@@ -39,3 +39,13 @@ class productManager {
     }
   }
 }
+
+const productManager =  new ProductManager()
+
+productManager.addProducts("productazo", "es un comestible", 200, "img not found", "200715", 10);
+productManager.getProducts();
+productManager.addProducts("productazo", "es un comestible", 200, "img not found", "200715", 10);
+productManager.getProducts();
+productManager.getProductsById(2)
+
+console.log(ProductManager)
