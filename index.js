@@ -1,6 +1,6 @@
 class ProductManager {
   constructor() {
-    this.products;
+    this.products = [];
     this.autoId = 0;
   }
 
@@ -16,7 +16,7 @@ class ProductManager {
     };
 
     const validateCode = this.products.find(
-      (product) => product.code === newProduct.code
+      (products) => products.code === newProduct.code
     );
     if (validateCode) {
       console.log("Error, el codigo ingresado ya esta en uso");
@@ -31,7 +31,7 @@ class ProductManager {
   }
 
   getProductsById(id) {
-    let searchId = this.product.find((i) => i.id == id);
+    let searchId = this.products.find ((i) => i.id == id);
     if (searchId === undefined) {
       console.log("Not Found");
     } else {
