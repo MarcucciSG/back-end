@@ -1,5 +1,5 @@
 const express = require("express");
-const ProductManager = requiere("./ProductManager.js");
+const ProductManager = require('./productManager');
 
 const productManager = new ProductManager();
 
@@ -23,3 +23,6 @@ app.get("/products/:pid", async (req, res) => {
   
   res.send(product)
 });
+
+
+app.listen(8080, () => console.log('servidor iniciado en puerto 8080'))
