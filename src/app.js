@@ -1,5 +1,5 @@
 const express = require("express");
-const ProductManager = requiere("./ProductManager");
+const ProductManager = requiere("./ProductManager.js");
 
 const productManager = new ProductManager();
 
@@ -7,9 +7,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/products", (req, res) => {
+app.get("/products", async (req, res) => {
   const limit = req.query.limit;
-  const products = productManager.getProducts();
+  const products = await productManager.getProducts();
 
   if (limit) {
     return res.send(products.slice(0, limit));
@@ -17,10 +17,9 @@ app.get("/products", (req, res) => {
   res.send(products);
 });
 
-app.get("/products/:pid", (req, res) => {
+app.get("/products/:pid", async (req, res) => {
   const pid = parseInt(req.params.pid, 10);
-  const products = productManager.getProducts();
-
-  const product = products.find(({ id }) => id === pid);
+  const product = await productManager.getProductsById(pid);
+  
   res.send(product)
 });
