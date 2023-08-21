@@ -118,3 +118,5 @@ const funcionAsync = async () => {
 };
 
 funcionAsync();
+
+module.exports = ProductManager;
