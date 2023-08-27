@@ -1,7 +1,7 @@
-const fs = require("fs");
+import fs from "fs"
 
-class ProductManager {
-  products;
+export default class ProductManager{
+  
 
   constructor() {
     this.products = [];
@@ -68,10 +68,17 @@ class ProductManager {
 
   async updateProducts(id, product) {
     let data = await this.getProducts();
-    let i = data.findIndex((e) => e.id === id);
-    product.id = id;
-    data.splice(i, 1, product);
-    await fs.promises.writeFile(this.path, JSON.stringify(data));
+    let i = data.findIndex((e) => e.id === id);    
+    //data.splice(i, 1, product);
+    if(i != -1){
+      const newProduct = {
+        ...data[i],
+        ...product
+      }
+      data[i] = newProduct
+      await fs.promises.writeFile(this.path, JSON.stringify(data));
+    }
+    
   }
 }
 
@@ -114,9 +121,8 @@ const funcionAsync = async () => {
     stock: 25,
     id: 5,
   });
-  await productManager.deleteProduct(2);
+  //await productManager.deleteProduct(2);
 };
 
-funcionAsync();
+//funcionAsync();
 
-module.exports = ProductManager;

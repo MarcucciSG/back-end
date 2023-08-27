@@ -1,1 +1,29 @@
-[{"title":"producto prueba","description":"Este es un producto prueba","price":200,"thumbnail":"Sin imagen","code":"abc123","stock":25,"id":1}]
+[
+	{
+		"title": "producto prueba 25 ",
+		"description": "Este es un producto prueba 23",
+		"price": 150,
+		"thumbnail": "Sin imagen",
+		"code": "abc1231",
+		"stock": 25,
+		"id": 5
+	},
+	{
+		"title": "silla",
+		"description": "es de metal",
+		"price": 500,
+		"thumbnail": "not found",
+		"code": "mar3",
+		"stock": 5,
+		"id": 3
+	},
+	{
+		"title": "cama",
+		"description": "1 plaza",
+		"price": 500,
+		"thumbnail": "not found",
+		"code": "mar5",
+		"stock": 5,
+		"id": 3
+	}
+]
