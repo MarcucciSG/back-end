@@ -18,7 +18,7 @@ export default class ProductManager{
     return data.length + 1;
   }
 
-  async addProduct(title, description, price, thumbnail, code, stock) {
+  async addProduct(title, description, price, thumbnail, code, stock, status, category) {
     const newProduct = {
       title,
       description,
@@ -26,6 +26,8 @@ export default class ProductManager{
       thumbnail,
       code,
       stock,
+      status,
+      category,
     };
 
     try {
@@ -76,7 +78,7 @@ export default class ProductManager{
         ...product
       }
       data[i] = newProduct
-      await fs.promises.writeFile(this.path, JSON.stringify(data));
+      
     }
     
   }

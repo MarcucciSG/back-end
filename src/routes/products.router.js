@@ -26,7 +26,7 @@ router.get("/products/:pid", async (req, res) => {
 });
 
 router.post("/products/", async (req, res) => {
-  const { title, description, price, thumbnail, code, stock } = req.body;
+  const { title, description, price, thumbnail, code, stock, status, category } = req.body;
   res.send(
     await productManager.addProduct(
       title,
@@ -34,7 +34,9 @@ router.post("/products/", async (req, res) => {
       price,
       thumbnail,
       code,
-      stock
+      stock,
+      status,
+      category
     )
   );
 
@@ -59,7 +61,7 @@ router.delete("/products/:id", async (req, res) =>{
   const pid = parseInt(req.params.pid, 10);
 
   await productManager.deleteProduct(pid);
-  res.send("se borro con exito");
+  res.send("se borro con exito")
 })
 
 export default router;

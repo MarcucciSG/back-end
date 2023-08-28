@@ -9,21 +9,43 @@
 		"id": 5
 	},
 	{
-		"title": "silla",
-		"description": "es de metal",
-		"price": 500,
-		"thumbnail": "not found",
-		"code": "mar3",
-		"stock": 5,
-		"id": 3
+		"title": "silla ",
+		"description": "es de madera",
+		"price": 150,
+		"thumbnail": "Sin imagen",
+		"code": "marc1",
+		"stock": 25,
+		"id": 2
 	},
 	{
 		"title": "cama",
-		"description": "1 plaza",
-		"price": 500,
-		"thumbnail": "not found",
-		"code": "mar5",
-		"stock": 5,
+		"description": "2 plazas",
+		"price": 150,
+		"thumbnail": "Sin imagen",
+		"code": "marc2",
+		"stock": 25,
 		"id": 3
+	},
+	{
+		"title": "sillon",
+		"description": "3 plazas",
+		"price": 550,
+		"thumbnail": "Sin imagen",
+		"code": "marc3",
+		"stock": 5,
+		"status": true,
+		"category": "muebles",
+		"id": 4
+	},
+	{
+		"title": "mesa",
+		"description": "con 5 sillas",
+		"price": 650,
+		"thumbnail": "Sin imagen",
+		"code": "marc4",
+		"stock": 5,
+		"status": true,
+		"category": "muebles",
+		"id": 5
 	}
 ]
