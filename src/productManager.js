@@ -45,9 +45,7 @@ export default class ProductManager{
         repeatCode == true
           ? console.log("El codigo esta repetido")
           : data.push({ ...newProduct, id: await this.getId() });
-        await fs.promises.writeFile(
-          this.path,
-          JSON.stringify(data, null, "\t")
+        await fs.promises.writeFile(this.path,JSON.stringify(data, null, "\t")
         );
       }
     } catch (err) {
