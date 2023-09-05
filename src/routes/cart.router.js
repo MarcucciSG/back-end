@@ -9,7 +9,7 @@ let newCart = { id: 0, products: [] };
 
 cartRouter.post("/", async (req, res) => {
   await manager.addCart(newCart);
-  res.send("Cart added successfully");
+  res.send("Carrito agregado de manera correcta");
 });
 
 cartRouter.get("/:cid", async (req, res) => {
@@ -26,6 +26,6 @@ cartRouter.post("/:cid/product/:pid", async (req, res) => {
   let newProduct = { id: productId.id, quantity: 1 };
   await manager.addProductsToCart(cid, pid, newProduct);
 
-  res.send("Porduct added to cart");
+  res.send("Producto añadido al carrito");
 });
 export default cartRouter;

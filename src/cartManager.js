@@ -46,10 +46,10 @@ class CartManager {
 
         await fs.promises.writeFile(this.cart, JSON.stringify(carts));
       } else {
-        console.log("Cart not found");
+        console.log("No existe el carrito");
       }
     } catch (error) {
-      console.error("Error adding product to cart:", error);
+      console.error("error al ingresas producto", error);
     }
   }
 }
