@@ -29,8 +29,11 @@ router.get("/products/:pid", async (req, res) => {
 });
 
 router.post("/products/", async (req, res) => {
+  const products = await productManager.getProducts();
+  req.context.socketServer.emit('updateProducts', products);
   const { title, description, price, thumbnail, code, stock, status, category } = req.body;
   res.send(
+    
     await productManager.addProduct(
       title,
       description,
@@ -42,7 +45,7 @@ router.post("/products/", async (req, res) => {
       category
     )
   );
-
+      
   if (productManager) {
     res.send(productManager);
   } else {
@@ -62,6 +65,8 @@ router.put("/products/:pid", async (req, res) => {
 
 router.delete("/products/:id", async (req, res) =>{
   const pid = parseInt(req.params.pid, 10);
+  const products = await productManager.getProducts();
+  req.context.socketServer.emit('updateProducts', products);
 
   await productManager.deleteProduct(pid);
   res.send("se borro con exito")
