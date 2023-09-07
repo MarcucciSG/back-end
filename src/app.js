@@ -1,14 +1,13 @@
 import express from "express";
 import { Server } from "socket.io";
+import { Socket } from "socket.io";
 import productRouter from "./routes/products.router.js";
 import cartRouter from "./routes/cart.router.js";
 import viewsRouter from "./routes/views.Router.js";
 import handlebars from "express-handlebars";
 import ProductManager from "./productManager.js";
 
-
-
-const productManager = new ProductManager('./products.json')
+const productManager = new ProductManager("./products.json");
 const app = express();
 const sv = app.listen(8080, () =>
   console.log("listo servidor en localhost: 8080")
@@ -33,8 +32,24 @@ app.use("/api/products", productRouter);
 app.use("/", viewsRouter);
 app.use("/api/carts", cartRouter);
 
-
-socketServer.on('connection', async (socket) => {
-  console.log("Nuevo Cliente", socket.id)
-  socket.emit('productos',await productManager.getProducts() )
-})
+socketServer.on("connection", async (socket) => {
+  console.log("Nuevo Cliente", socket.id);
+  socket.emit("productos", await productManager.getProducts());
+  
+  const product = new ProductManager("/products.json");
+  socket.on("newProduct", async (productPost) => {
+    // me entero (como servidor) que un socket agrega un nuevo producto
+    await product.addProduct(
+      productPost.id,
+      productPost.title,
+      productPost.description,
+      productPost.price,
+      productPost.thumbnail,
+      productPost.code,
+      productPost.stock,
+      productPost.status,
+      productPost.category
+    );
+    socketServer.emit("productos", await product.getProducts()); //aviso a todos los sockets que hay nuevos productos
+  });
+});

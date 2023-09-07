@@ -1,6 +1,40 @@
-<div id="productos"></div>
+<section>
+    <div>
+        <h1 style="font-size: 50px; font-weight: bold; text-align: center;">PRODUCTS:</h1>
+    </div>
+
+    <div style="margin: 90px; font-size: 20px; text-align:center">
+        <br style="font-size: 40px; display: flex; justify-content: center; ">
+        <form id="form">
+            <h1 style="margin-bottom: 5px; font-size: 20px;">Add Products:</h1>
+            <br / style="font-size: 10px">
+            <input type="text" id="prod_title" name="prod-title" placeholder="Title"><br>
+            <br>
+            <input type="text" id="prod_description" name="prod-description" placeholder="Description"><br>
+            <input type="number" id="prod_price" name="prod-price" placeholder="Price"><br>
+            <input type="text" id="prod_thumbnail" name="prod-thumbnail" placeholder="Thumbnail"><br>
+            <input type="number" id="prod_code" name="prod-code" placeholder="Code"><br>
+            <input type="text" id="prod_stock" name="prod-stock" placeholder="Stock"><br>
+            <input type="text" id="prod_status" name="prod-status" placeholder="Status: true or false"><br>
+            <input type="text" id="prod_category" name="prod-category" placeholder="Category"><br>
+
+            <br />
+            <input id="post" type="submit" value="Post" class="btn btn-primary">
+        </form>
+    </div>
+
+    <br / style="font-size: 40px">
+
+    <div style="margin: 30px; font-size: 20px; text-align:center" id="delete">
+        <h1 style="font-size: 20px;">Put the id number for delete a Product:</h1>
+        <input type="number" id="prod-delete" name="prod-delete" placeholder="id">
+        <br / style="font-size: 30px"> <br />
+        <input id="post-delete" type="submit" value="Delete" class="btn btn-danger">        
+    </div>
+
+    </div>
 
 
-
+    
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/realTime.js"></script>
