@@ -38,7 +38,7 @@ socketServer.on("connection", async (socket) => {
   
   const product = new ProductManager("/products.json");
   socket.on("newProduct", async (productPost) => {
-    // me entero (como servidor) que un socket agrega un nuevo producto
+    
     await product.addProduct(
       productPost.id,
       productPost.title,
@@ -50,6 +50,18 @@ socketServer.on("connection", async (socket) => {
       productPost.status,
       productPost.category
     );
-    socketServer.emit("productos", await product.getProducts()); //aviso a todos los sockets que hay nuevos productos
+    socketServer.emit("productos", await product.getProducts());
   });
+
+  socket.on('deleteProduct', async (data) => {
+    const idToDelete = parseInt(data.idDeleteFromSocketClient, 10);
+    console.log(`Solicitud de eliminación recibida del cliente:`, idToDelete);
+    await product.deleteProduct(idToDelete);
+    socketServer.emit('Socket-Products', await product.getProducts());
+});
+
+socket.on('disconnect', () => {
+    console.log(`Usuario desconectado con ID: ${socket.id}`);
+
+});
 });

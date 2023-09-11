@@ -27,4 +27,26 @@ form.addEventListener("submit", (e) => {
     status: inputStatus,
     category: inputCategory,
   });
-});
+
+  const deleteProduct = document.getElementById('post-delete')
+  const inputDelete = document.getElementById('prod-delete')
+  
+  deleteProduct.addEventListener('click', (event)=>{
+      event.preventDefault()
+      const idDeleteFromSocketClient = inputDelete.value
+      socketClient.emit('deleteProduct', {idDeleteFromSocketClient})
+  })
+  
+  
+  
+  
+  socketClient.on('Socket-Products', (productsList) => { 
+      //recibimos la lista actualizada de productos
+      productsContainer.innerHTML = '';
+      productsList.forEach(product => {
+        productsContainer.innerHTML = productsContainer.innerHTML + `<li>(id: ${product.id}) ${product.title}</li>`;
+      }) 
+  
+  });
+  
+})
