@@ -1,11 +1,12 @@
 import express from "express";
 import ProductManager from "../dao/filesystem/productManager.js";
+import { Router } from "express";
 
 
 
 
 const productManager = new ProductManager();
-const router = express.Router();
+const router = Router();
 
 router.get("/products", async (req, res) => {
   const limit = req.query.limit;
@@ -18,7 +19,7 @@ router.get("/products", async (req, res) => {
 });
 
 router.get("/products/:pid", async (req, res) => {
-  const pid = parseInt(req.params.pid, 10);
+  const pid = req.params.pid;
   const product = await productManager.getProductsById(pid);
 
   if (product) {
@@ -54,7 +55,7 @@ router.post("/products/", async (req, res) => {
 });
 
 router.put("/products/:pid", async (req, res) => {
-  const pid = parseInt(req.params.pid, 10);
+  const pid = req.params.pid;
   const updateProductData = req.body;
 
   await productManager.updateProducts(pid, updateProductData);
@@ -64,7 +65,7 @@ router.put("/products/:pid", async (req, res) => {
 
 
 router.delete("/products/:id", async (req, res) =>{
-  const pid = parseInt(req.params.pid, 10);
+  const pid = req.params.pid;
   const products = await productManager.getProducts();
   req.context.socketServer.emit('updateProducts', products);
 

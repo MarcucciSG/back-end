@@ -7,11 +7,11 @@ import viewsRouter from "./routes/views.Router.js";
 import handlebars from "express-handlebars";
 import ProductManager from "./dao/filesystem/productManager.js";
 import mongoose from "mongoose";
+import chatEvents from "./socket/chat.js";
 
-import { mensajeModel } from "./dao/models/mensajes.model.js";
-
-
-mongoose.connect("mongodb+srv://marcuccisantiago8:6DkBMXU3lAE3TPUU@cluster0.fehywwf.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect(
+  "mongodb+srv://marcuccisantiago8:6DkBMXU3lAE3TPUU@cluster0.fehywwf.mongodb.net/?retryWrites=true&w=majority"
+);
 
 const productManager = new ProductManager("./products.json");
 const app = express();
@@ -27,16 +27,16 @@ app.use(express.urlencoded({ extended: true }));
 app.engine("handlebars", handlebars.engine());
 app.set("views", "./src/views");
 app.set("view engine", "handlebars");
-app.use('/static',express.static("./src/public"));
+app.use("/static", express.static("./src/public"));
 
 app.use((req, res, next) => {
   req.context = { socketServer };
   next();
 });
 
-app.use("/api/products", productRouter);
+app.use("/api", productRouter);
 app.use("/", viewsRouter);
-app.use("/api/carts", cartRouter);
+app.use("/api", cartRouter);
 
 socketServer.on("connection", async (socket) => {
   console.log("Nuevo Cliente", socket.id);
@@ -70,11 +70,13 @@ socketServer.on("connection", async (socket) => {
   });
 });
 
-socketServer.on('connection', (socket) =>{
+socketServer.on("connection", (socket) => {
   console.log("se conecto", socket.id);
-  socket.on('mensaje', async (data)=> {
+  socket.on("mensaje", async (data) => {
     await mensajeModel.create(data);
-    const mensajes = await mensajeModel.find().lean()
-    socketServer.emit('nuevo_mensaje', mensajes)
-  })
-})
+    const mensajes = await mensajeModel.find().lean();
+    socketServer.emit("nuevo_mensaje", mensajes);
+  });
+});
+
+chatEvents(socketServer);
