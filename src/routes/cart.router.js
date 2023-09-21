@@ -1,8 +1,8 @@
 import { Router } from "express";
 const cartRouter = Router();
-import cartManager from "../cartManager.js";
+import cartManager from "../dao/filesystem/cartManager.js";
 const manager = new cartManager("./src/carts.json");
-import ProductManager from "../productManager.js";
+import ProductManager from "../dao/filesystem/productManager.js";
 const products = new ProductManager("./src/products.json");
 
 let newCart = { id: 0, products: [] };
