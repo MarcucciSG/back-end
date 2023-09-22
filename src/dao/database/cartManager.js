@@ -16,14 +16,19 @@ export default class CartManager {
     return cart;
   }
 
-  async addProductsToCart(cid) {
-    const cart = await this.getCartByid(cid);
+  async addProductToCartId(cid, pid) { 
+    const cart = await this.getCartById(cid); 
 
-    if (cart) {
-      return cart.products;
-    } else {
-      console.log("cart not found");
-      return [];
-    }
-  }
+    let item = cart.products.find((p) => p.product == pid); 
+
+    if (item) { 
+        item.quantity++; 
+    } else { 
+        item = { product: pid, quantity: 1 }; 
+        cart.products.push(item); 
+    } 
+
+    await cart.save(); 
+    return item; 
+}
 }
